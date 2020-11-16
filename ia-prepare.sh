@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# if [ -z "$1" ]; then
-#   printf "Usage: $ ia-prepare <directory name>\nPlease make sure you reference a desired oral history directory to prepare.\n"
-#   exit 1
-# fi
-
 if ! [[ -f ~/ia-config ]]; then
   echo "Couldn't find ia-config."
   exit 1
