@@ -8,6 +8,7 @@ const { argv } = require('process');
 
 const fields = require('./fields');
 const airtableFields = require('./airtableFields');
+const {normalize} = require('./helpers');
 
 const year = argv[2];
 const month = argv[3];
@@ -59,11 +60,11 @@ function getCsvRow (record) {
   }, {});
 }
 
-const stagedDirectories = new Set(fs.readdirSync(process.env.IA_STAGING));
+const stagedDirectories = new Set(fs.readdirSync(process.env.IA_STAGING).map(normalize));
 
 getRecords().then(airtableRecords => {
   const rows = airtableRecords
-    .filter(record => stagedDirectories.has(record.get('Identifier')))
+    .filter(record => stagedDirectories.has(normalize(record.get('Identifier'))))
     .map(getCsvRow);
 
   const header = fields.map(field => ({id: field.name, title: field.name}));

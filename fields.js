@@ -1,4 +1,5 @@
 const Field = require('./field');
+const {normalize} = require('./helpers');
 
 const fileMapper = record => {
   const id = record.get('Identifier');
@@ -45,7 +46,7 @@ const creatorMapper = record => {
 
 module.exports = [
   // reserved IA metadata fields
-  new Field('Identifier', 'identifier', record => `${record.get('Identifier').replace('+', '-')}`),
+  new Field('Identifier', 'identifier', record => `${normalize(record.get('Identifier')).replace('+', '-')}`),
   new Field(null, 'file', fileMapper),
   new Field('Title', 'title'),
   new Field(null, 'creator', creatorMapper),
