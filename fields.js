@@ -45,7 +45,7 @@ const creatorMapper = record => {
 
 module.exports = [
   // reserved IA metadata fields
-  new Field('Identifier', 'identifier', record => `TEST_${record.get('Identifier').replace('+', '-')}`),
+  new Field('Identifier', 'identifier'),
   new Field(null, 'file', fileMapper),
   new Field('Title', 'title'),
   new Field(null, 'creator', creatorMapper),
